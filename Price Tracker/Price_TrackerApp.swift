@@ -9,10 +9,22 @@ import SwiftUI
 
 @main
 struct Price_TrackerApp: App {
+  private let socketHandler = WebSocketHandler<StockPriceFeed>()
   let mockFeedManager = MockPriceFeedManager.shared
   var body: some Scene {
     WindowGroup {
-      StockFeedView()
+      StockFeedContainer().environment(\.stockPriceSocketHandler, socketHandler)
     }
+  }
+}
+
+private struct StockPriceSocketHandlerKey: EnvironmentKey {
+  static let defaultValue: WebSocketHandler<StockPriceFeed> = WebSocketHandler<StockPriceFeed>()
+}
+
+extension EnvironmentValues {
+  var stockPriceSocketHandler: WebSocketHandler<StockPriceFeed> {
+    get { self[StockPriceSocketHandlerKey.self] }
+    set { self[StockPriceSocketHandlerKey.self] = newValue }
   }
 }

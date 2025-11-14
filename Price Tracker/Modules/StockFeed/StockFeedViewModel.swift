@@ -7,17 +7,19 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 @MainActor
 class StockFeedViewModel: ObservableObject {
   @Published var connectionState: WebSocketConnectionState = .disconnected
   @Published var stocks: [StockFeedRow] = []
-  private var socketHandler: WebSocketHandler<StockPriceFeed> = WebSocketHandler<StockPriceFeed>()
+  private let socketHandler: WebSocketHandler<StockPriceFeed>
   private var latestBySymbol: [String: StockFeedRow] = [:]
   private var connectionStateCancellable: AnyCancellable?
   private var messagesCancellable: AnyCancellable?
   
-  init() {
+  init(socketHandler: WebSocketHandler<StockPriceFeed>) {
+    self.socketHandler = socketHandler
     bindSocket()
   }
   
@@ -72,3 +74,5 @@ class StockFeedViewModel: ObservableObject {
   
   
 }
+
+
