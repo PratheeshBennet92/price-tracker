@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "023A014C-19FE-45E7-8033-EC408CB2CFED"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "754A1FB3-C51F-4C6F-8A91-8F5EAC858B67"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Price Tracker/Modules/WebSocketManager/WebSocketHandler.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "WebSocketHandler"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "754A1FB3-C51F-4C6F-8A91-8F5EAC858B67 - 532eab803b545830"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Price_Tracker.WebSocketHandler.connectionState : Price_Tracker.WebSocketConnectionState"
+                  moduleName = "Price Tracker.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pratheeshbennet/Documents/Price%20Tracker/Price%20Tracker/Modules/WebSocketManager/WebSocketHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "754A1FB3-C51F-4C6F-8A91-8F5EAC858B67 - 8d3c0fc07c383f49"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Price_Tracker.WebSocketHandler.connectionState.getter : Price_Tracker.WebSocketConnectionState"
+                  moduleName = "Price Tracker.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pratheeshbennet/Documents/Price%20Tracker/Price%20Tracker/Modules/WebSocketManager/WebSocketHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "754A1FB3-C51F-4C6F-8A91-8F5EAC858B67 - 5254203ebcbe075d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Price_Tracker.WebSocketHandler.connectionState.setter : Price_Tracker.WebSocketConnectionState"
+                  moduleName = "Price Tracker.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pratheeshbennet/Documents/Price%20Tracker/Price%20Tracker/Modules/WebSocketManager/WebSocketHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "754A1FB3-C51F-4C6F-8A91-8F5EAC858B67 - 9fa4b33661267651"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Price_Tracker.WebSocketHandler.$connectionState.getter : Combine.Published&lt;Price_Tracker.WebSocketConnectionState&gt;.Publisher"
+                  moduleName = "Price Tracker.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pratheeshbennet/Documents/Price%20Tracker/Price%20Tracker/Modules/WebSocketManager/WebSocketHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "754A1FB3-C51F-4C6F-8A91-8F5EAC858B67 - c39351d46849563c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Price_Tracker.WebSocketHandler.$connectionState.setter : Combine.Published&lt;Price_Tracker.WebSocketConnectionState&gt;.Publisher"
+                  moduleName = "Price Tracker.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pratheeshbennet/Documents/Price%20Tracker/%3Cstdin%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "278D22C8-135A-447D-B70A-83E1FD51E280"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Price Tracker/Modules/MockPriceFeeder/MockPriceFeedManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "postStockPrice(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "47D26F44-2F6E-4A1A-AFDC-981E54722816"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Price Tracker/Modules/WebSocketManager/WebSocketHandler.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "sendMessage(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
