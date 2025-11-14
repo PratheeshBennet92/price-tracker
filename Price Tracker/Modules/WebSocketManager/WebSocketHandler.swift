@@ -18,7 +18,7 @@ enum WebSocketConnectionState {
 final class WebSocketHandler<T: Codable>: ObservableObject {
   
   @Published private(set) var connectionState: WebSocketConnectionState = .disconnected
-  let messages: PassthroughSubject<T, Never> = .init()
+  let messages: PassthroughSubject<T, Never> = PassthroughSubject<T, Never>()
   private let url: URL
   private let urlSession: URLSession
   private var task: URLSessionWebSocketTask?
@@ -36,7 +36,6 @@ final class WebSocketHandler<T: Codable>: ObservableObject {
     updateState(.connecting)
     task = urlSession.webSocketTask(with: url)
     task?.resume()
-    receiveMessages()
     updateState(.connected)
   }
   
@@ -71,7 +70,7 @@ final class WebSocketHandler<T: Codable>: ObservableObject {
     }
   }
   
-  private func receiveMessages() {
+  func receiveMessages() {
     task?.receive { [weak self] result in
       guard let self else { return }
       switch result {
@@ -104,6 +103,7 @@ final class WebSocketHandler<T: Codable>: ObservableObject {
     } else {
       updateState(.failed(error))
     }
+    debugPrint(error)
   }
   
   private func updateState(_ newState: WebSocketConnectionState) {

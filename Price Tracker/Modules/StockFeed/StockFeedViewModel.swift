@@ -38,6 +38,7 @@ class StockFeedViewModel: ObservableObject {
   
   func startPolling() {
     socketHandler.connect()
+    socketHandler.receiveMessages()
   }
   
   func stopPolling() {

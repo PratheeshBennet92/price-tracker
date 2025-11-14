@@ -13,12 +13,20 @@ struct StockFeedView: View {
   @State private var isPolling: Bool = false
 
   init(socketHandler: WebSocketHandler<StockPriceFeed>) {
-    self._viewModel = StateObject(wrappedValue: StockFeedViewModel(socketHandler: socketHandler))
-    
+    _viewModel = StateObject(wrappedValue: StockFeedViewModel(socketHandler: socketHandler))
   }
 
   var body: some View {
-    Text("Hello, World!")
+    List(viewModel.stocks) { row in
+      NavigationLink {
+        Text("\(row.symbol) - \(row.price)")
+      } label: {
+        StockFeedRowView(row: row)
+      }
+    }
+    .onAppear {
+      viewModel.startPolling()
+    }
   }
 }
 

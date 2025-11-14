@@ -10,7 +10,12 @@ import SwiftUI
 @main
 struct Price_TrackerApp: App {
   private let socketHandler = WebSocketHandler<StockPriceFeed>()
-  let mockFeedManager = MockPriceFeedManager.shared
+  let mockFeedManager: MockPriceFeedManager
+  
+  init() {
+    mockFeedManager = MockPriceFeedManager(socketHandler: socketHandler)
+  }
+  
   var body: some Scene {
     WindowGroup {
       StockFeedContainer().environment(\.stockPriceSocketHandler, socketHandler)

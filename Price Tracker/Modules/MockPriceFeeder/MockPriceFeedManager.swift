@@ -9,12 +9,12 @@ import Foundation
 import Combine
 
 final class MockPriceFeedManager {
-  static let shared = MockPriceFeedManager()
   private let symbols: [StockInfo] = StockSymbols.all
-  private var socketHandler: WebSocketHandler<StockPriceFeed> = WebSocketHandler<StockPriceFeed>()
+  private let socketHandler: WebSocketHandler<StockPriceFeed>
   private var timerCancellable: AnyCancellable?
   
-  private init() {
+  init(socketHandler: WebSocketHandler<StockPriceFeed>) {
+    self.socketHandler = socketHandler
     startFeeder()
   }
   
