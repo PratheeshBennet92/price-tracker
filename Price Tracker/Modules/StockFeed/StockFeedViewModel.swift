@@ -15,28 +15,35 @@ class StockFeedViewModel: ObservableObject {
   @Published var stocks: [StockFeedRow] = []
   private let socketHandler: WebSocketHandler<StockPriceFeed>
   private var latestBySymbol: [String: StockFeedRow] = [:]
-//  private var connectionStateCancellable: AnyCancellable?
-//  private var messagesCancellable: AnyCancellable?
-  private var cancellables: Set<AnyCancellable> = []
+  private var connectionStateCancellable: AnyCancellable?
+  private var messagesCancellable: AnyCancellable?
   
   init(socketHandler: WebSocketHandler<StockPriceFeed>) {
     self.socketHandler = socketHandler
-    bindSocket()
   }
   
   private func bindSocket() {
     
-    socketHandler.$connectionState
+    connectionStateCancellable = socketHandler.$connectionState
           .assign(to: \.connectionState, on: self)
-          .store(in: &cancellables)
  
     
-    socketHandler.messages
+    messagesCancellable = socketHandler.messages
       .receive(on: DispatchQueue.main)
       .sink { [weak self] stockFeed in
         self?.handleIncoming(stockFeed)
       }
-      .store(in: &cancellables)
+  }
+  
+  func startUIListening() {
+    bindSocket()
+  }
+  
+  func stopUIListening() {
+    connectionStateCancellable?.cancel()
+    messagesCancellable?.cancel()
+    connectionStateCancellable = nil
+    messagesCancellable = nil
   }
   
   func startPolling() {
@@ -49,9 +56,8 @@ class StockFeedViewModel: ObservableObject {
   }
   
   deinit {
-    cancellables.forEach { eachCancellable in
-      eachCancellable.cancel()
-    }
+    connectionStateCancellable?.cancel()
+    messagesCancellable?.cancel()
   }
   
   private func handleIncoming(_ feed: StockPriceFeed) {

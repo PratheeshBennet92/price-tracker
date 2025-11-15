@@ -75,7 +75,11 @@ struct StockFeedView: View {
       }
       .navigationTitle("Stocks")
       .onAppear {
+        viewModel.startUIListening()
         isPolling = true
+      }
+      .onDisappear {
+        viewModel.stopUIListening()
       }
     }
   }

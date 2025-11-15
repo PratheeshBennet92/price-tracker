@@ -21,12 +21,12 @@ struct StockFeedDetailView: View, PriceDirectionRepresentable {
     NavigationStack {
       VStack {
         Text(viewModel.stockFeedRow.company)
-          .font(Font.largeTitle)
+          .font(Font.title).padding(.bottom, 20)
         HStack {
-          Text("\(viewModel.stockFeedRow.price)")
-            .font(.title)
+          Text("\(viewModel.stockFeedRow.price, specifier: "%.2f")")
+            .font(.title2)
           Text(directionSymbol)
-            .font(.subheadline.bold())
+            .font(.title2.bold())
             .foregroundStyle(directionColor)
         }
       }
