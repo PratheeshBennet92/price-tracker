@@ -15,7 +15,7 @@ The design is intentionally independent and modular:
 - ViewModels contain all business logic, including sorting, price-direction calculation, state handling, and data transformation. Views never perform logic.
 - Views contain only UI rendering, subscribing to `@Published` properties from the ViewModel. All formatting, animations, and display behaviors remain UI-focused, keeping a strict separation from application logic.
 - UI components rely on lightweight protocols such as `PriceDirectionRepresentable`, `PriceFlashRepresentable`, and `ConnectionSignalRepresentable` to handle price directional indicators, price-flash behavior, and connection state.  
-- These protocol-driven components are fully reusable and plug-and-play across multiple views without duplicating logic, promoting clean separation of concerns and consistency in UI behavior.
+- These protocol-driven components. logics are fully reusable and plug-and-play across multiple views without duplicating logic, promoting clean separation of concerns and consistency in UI behavior. E.g., sharing common UI components and logic between StockFeedDetailView & StockFeedView
 
 
 ---
@@ -60,5 +60,5 @@ The design is intentionally independent and modular:
 ## Reusable Components
 
 - UI components rely on lightweight protocols such as `PriceDirectionRepresentable`, `PriceFlashRepresentable`, and `ConnectionSignalRepresentable` to handle price directional indicators, price-flash behavior, and connection state.  
-- These protocol-driven components are fully reusable and plug-and-play across multiple views without duplicating logic, promoting clean separation of concerns and consistency in UI behavior.
+- These protocol-driven components. logics are fully reusable and plug-and-play across multiple views without duplicating logic, promoting clean separation of concerns and consistency in UI behavior. E.g., sharing common UI components and logic between StockFeedDetailView & StockFeedView
 
