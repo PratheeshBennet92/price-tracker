@@ -7,9 +7,10 @@
 import Foundation
 import Combine
 
-@MainActor
+
 class StockFeedDetailViewModel: ObservableObject {
   @Published var stockFeedRow: StockFeedRow
+  @Published var connectionState: WebSocketConnectionState = .disconnected
   private let socketHandler: WebSocketHandler<StockPriceFeed>
   private var cancellables: Set<AnyCancellable> = []
   init(socketHandler: WebSocketHandler<StockPriceFeed>,
@@ -20,10 +21,17 @@ class StockFeedDetailViewModel: ObservableObject {
   }
   
   private func bindSocket() {
+    socketHandler.$connectionState
+      .assign(to: \.connectionState, on: self)
+      .store(in: &cancellables)
+    
     socketHandler.messages
       .receive(on: DispatchQueue.main)
-      .sink { [weak self] feed in
-        self?.handleIncoming(feed)
+      .collect(.byTime(DispatchQueue.main, .milliseconds(1000)))
+      .sink { [weak self] stockFeed in
+        stockFeed.forEach({
+          self?.handleIncoming($0)
+        })
       }.store(in: &cancellables)
   }
   

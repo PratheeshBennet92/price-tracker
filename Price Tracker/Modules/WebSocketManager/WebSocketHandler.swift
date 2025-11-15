@@ -12,8 +12,8 @@ enum WebSocketConnectionError: Error {
   case unknown
   var description: String? {
     switch self {
-    case .technical: return "WebSocket technical error occurred."
-    case .unknown: return "Unknown WebSocket error occurred."
+    case .technical: return "Technical error"
+    case .unknown: return "Unknown error"
     }
   }
 }
@@ -23,7 +23,7 @@ enum WebSocketConnectionState {
   case connected
   case failed(WebSocketConnectionError)
   
-  var connectionState: String {
+  var state: String {
     switch self {
     case .disconnected: return "Disconnected"
     case .connecting: return "Connecting"
@@ -69,7 +69,7 @@ final class WebSocketHandler<T: Codable>: ObservableObject {
       let data = try JSONEncoder().encode(message)
       guard let jsonString = String(data: data, encoding: .utf8) else { return }
       send(text: jsonString)
-      debugPrint("Sent Message:", jsonString)
+      //debugPrint("Sent Message:", jsonString)
     } catch {
       handleError(error)
     }
@@ -80,9 +80,9 @@ final class WebSocketHandler<T: Codable>: ObservableObject {
     task?.send(message) { [weak self] error in
       if let error {
         self?.handleError(error)
-        debugPrint("Error", error)
+        //debugPrint("Error", error)
       } else {
-        debugPrint("Send Success")
+        //debugPrint("Send Success")
       }
      
     }
@@ -98,12 +98,12 @@ final class WebSocketHandler<T: Codable>: ObservableObject {
           if let data = text.data(using: .utf8),
              let decoded = try? JSONDecoder().decode(T.self, from: data) {
             self.messages.send(decoded)
-            debugPrint("Received Message:", decoded)
+            //debugPrint("Received Message:", decoded)
           }
         case .data(let data):
           if let decoded = try? JSONDecoder().decode(T.self, from: data) {
             self.messages.send(decoded)
-            debugPrint("Received Message:", decoded)
+            //debugPrint("Received Message:", decoded)
           }
         @unknown default:
           break

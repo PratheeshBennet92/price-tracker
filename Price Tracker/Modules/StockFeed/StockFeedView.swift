@@ -8,9 +8,13 @@
 import SwiftUI
 
 
-struct StockFeedView: View {
+struct StockFeedView: View, ConnectionSignalRepresentable {
+  var connectionState: WebSocketConnectionState {
+    viewModel.connectionState
+  }
+  
   @StateObject private var viewModel: StockFeedViewModel
-  @State private var isPolling: Bool = false
+  @State private var isPolling: Bool = true
   @State private var shouldShowErrorAlert: Bool = false
   private let socketHandler: WebSocketHandler<StockPriceFeed>
 
@@ -18,25 +22,10 @@ struct StockFeedView: View {
     _viewModel = StateObject(wrappedValue: StockFeedViewModel(socketHandler: socketHandler))
     self.socketHandler = socketHandler
   }
-  private var errorView: some View {
-    Group {
-      if case .failed(let error) = viewModel.connectionState {
-        Text(error.description ?? "Unknown WebSocket error")
-          .foregroundColor(.red)
-          .padding(.horizontal, 16)
-      } else {
-        EmptyView()
-      }
-    }
-  }
+  
   private var connectionStatus: some View {
     HStack {
-      if case .failed = viewModel.connectionState {
-        EmptyView()
-      } else {
-        Text("\(isPolling ? "🟢" : "🔴") \(viewModel.connectionState.connectionState)")
-          .font(.headline)
-      }
+      connectionStatusSignalView
       Spacer()
       Toggle("", isOn: $isPolling)
         .toggleStyle(SwitchToggleStyle(tint: .green))
@@ -75,8 +64,10 @@ struct StockFeedView: View {
       }
       .navigationTitle("Stocks")
       .onAppear {
+        if isPolling {
+          viewModel.startPolling()
+        }
         viewModel.startUIListening()
-        isPolling = true
       }
       .onDisappear {
         viewModel.stopUIListening()

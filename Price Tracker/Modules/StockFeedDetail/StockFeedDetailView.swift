@@ -7,7 +7,11 @@
 
 import SwiftUI
 
-struct StockFeedDetailView: View, PriceDirectionRepresentable {
+struct StockFeedDetailView: View, PriceDirectionRepresentable, ConnectionSignalRepresentable {
+  var connectionState: WebSocketConnectionState {
+    viewModel.connectionState
+  }
+  
   var direction: PriceDirection {
     viewModel.stockFeedRow.direction
   }
@@ -31,5 +35,11 @@ struct StockFeedDetailView: View, PriceDirectionRepresentable {
         }
       }
     }.navigationTitle(Text("\(viewModel.stockFeedRow.symbol)"))
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          errorView
+          connectionStatusSignalView
+        }
+      }
   }
 }

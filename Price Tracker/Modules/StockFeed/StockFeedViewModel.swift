@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 
-@MainActor
+
 class StockFeedViewModel: ObservableObject {
   @Published var connectionState: WebSocketConnectionState = .disconnected
   @Published var stocks: [StockFeedRow] = []
@@ -30,8 +30,11 @@ class StockFeedViewModel: ObservableObject {
     
     messagesCancellable = socketHandler.messages
       .receive(on: DispatchQueue.main)
+      .collect(.byTime(DispatchQueue.main, .milliseconds(1000)))
       .sink { [weak self] stockFeed in
-        self?.handleIncoming(stockFeed)
+        stockFeed.forEach({
+          self?.handleIncoming($0)
+        })
       }
   }
   
@@ -61,7 +64,7 @@ class StockFeedViewModel: ObservableObject {
   }
   
   private func handleIncoming(_ feed: StockPriceFeed) {
-    debugPrint(feed)
+    //debugPrint(feed)
     let symbol = feed.symbol
     let newPrice = feed.price
     let company = StockSymbols.getCompany(forSymbol: symbol) ?? "N/A"
