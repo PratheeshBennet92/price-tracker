@@ -1,1 +1,60 @@
-# price-tracker
+# Price-Tracker
+
+https://github.com/user-attachments/assets/d8b3083b-b8a4-4220-b8cc-7b5995c6274e
+
+## Architecture
+
+The project follows a strict MVVM and unidirectional data flow structure using Combine.
+
+The design is intentionally independent and modular:
+- The WebSocket handler  WebSocketHandler<T: Codable> is generic and reusable across any data type.
+- ViewModels contain all business logic, including sorting, price-direction calculation, state handling, and data transformation. Views never perform logic.
+- Views contain only UI rendering, subscribing to `@Published` properties from the ViewModel. All formatting, animations, and display behaviors remain UI-focused, keeping a strict separation from application logic.
+- UI components rely on lightweight protocols such as `PriceDirectionRepresentable`, `PriceFlashRepresentable`, and `ConnectionSignalRepresentable` to handle directional indicators, price-flash behavior, and connection state.  
+- These protocol-driven components are fully reusable and plug-and-play across multiple views without duplicating logic, promoting clean separation of concerns and consistency in UI behavior.
+
+
+---
+
+## WebSocketHandler
+
+- Generic class responsible for WebSocket communication  
+- Connects to: `wss://ws.postman-echo.com/raw`  
+- Sends messages  
+- Receives echoed responses  
+
+
+---
+
+## MockPriceFeedManager
+
+- Generates mock stock price updates at regular intervals  
+
+---
+
+## ViewModels
+
+### StockFeedViewModel
+- Manages stock list updates  
+- Tracks WebSocket connection state  
+
+### StockFeedDetailViewModel
+- Listens only for updates related to the selected stock  
+
+---
+
+## Views
+
+### StockFeedView
+- Displays the main list of live prices  
+
+### StockFeedDetailView
+- Detail screen showing price movements for the selected stock  
+
+---
+
+## Reusable Components
+
+- UI components rely on lightweight protocols such as `PriceDirectionRepresentable`, `PriceFlashRepresentable`, and `ConnectionSignalRepresentable` to handle directional indicators, price-flash behavior, and connection state.  
+- These protocol-driven components are fully reusable and plug-and-play across multiple views without duplicating logic, promoting clean separation of concerns and consistency in UI behavior.
+
