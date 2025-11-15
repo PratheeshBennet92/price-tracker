@@ -1,6 +1,10 @@
 # Price-Tracker
 
-https://github.com/user-attachments/assets/d8b3083b-b8a4-4220-b8cc-7b5995c6274e
+
+
+https://github.com/user-attachments/assets/2aea69d1-274c-4702-812f-70e10a420983
+
+
 
 ## Architecture
 
