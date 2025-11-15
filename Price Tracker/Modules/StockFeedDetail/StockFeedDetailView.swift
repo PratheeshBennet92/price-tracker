@@ -28,7 +28,7 @@ struct StockFeedDetailView: View, PriceDirectionRepresentable, ConnectionSignalR
           .font(Font.title).padding(.bottom, 20)
         HStack {
           StockPriceLabel(row: viewModel.stockFeedRow)
-            .font(.title2)
+            .font(.title2.bold())
           Text(directionSymbol)
             .font(.title2.bold())
             .foregroundStyle(directionColor)

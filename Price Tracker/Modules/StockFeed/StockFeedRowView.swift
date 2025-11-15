@@ -23,6 +23,7 @@ struct StockFeedRowView: View, PriceDirectionRepresentable {
       
       Spacer()
       StockPriceLabel(row: row)
+        .font(.headline.bold())
       Text(directionSymbol)
         .font(.subheadline.bold())
         .foregroundStyle(directionColor)
