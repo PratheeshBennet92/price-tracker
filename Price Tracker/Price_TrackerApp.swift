@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct Price_TrackerApp: App {
+  @Environment(\.scenePhase) private var scenePhase
   private let socketHandler = WebSocketHandler<StockPriceFeed>()
   let mockFeedManager: MockPriceFeedManager
   
@@ -20,6 +21,17 @@ struct Price_TrackerApp: App {
   var body: some Scene {
     WindowGroup {
       StockFeedContainer().environment(\.stockPriceSocketHandler, socketHandler)
+    }
+    .onChange(of: scenePhase) { oldPhase, newPhase in
+      switch newPhase {
+      case .active:
+        socketHandler.connect()
+        socketHandler.receiveMessages()
+      case .inactive, .background:
+        socketHandler.disconnect()
+      default:
+        break
+      }
     }
   }
 }
