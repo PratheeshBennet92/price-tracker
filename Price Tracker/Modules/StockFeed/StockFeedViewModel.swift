@@ -20,6 +20,7 @@ class StockFeedViewModel: ObservableObject {
   
   init(socketHandler: WebSocketHandler<StockPriceFeed>) {
     self.socketHandler = socketHandler
+    startPolling()
   }
   
   private func bindSocket() {
@@ -30,7 +31,7 @@ class StockFeedViewModel: ObservableObject {
     
     messagesCancellable = socketHandler.messages
       .receive(on: DispatchQueue.main)
-      .collect(.byTime(DispatchQueue.main, .milliseconds(2000)))
+      .collect(.byTime(DispatchQueue.main, .milliseconds(500)))
       .sink { [weak self] stockFeed in
         stockFeed.forEach({
           self?.handleIncoming($0)

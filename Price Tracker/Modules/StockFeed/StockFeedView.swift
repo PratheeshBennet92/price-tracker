@@ -57,16 +57,16 @@ struct StockFeedView: View, ConnectionSignalRepresentable {
       }
       List(viewModel.stocks) { row in
         NavigationLink {
-          StockFeedDetailView(viewModel:  StockFeedDetailViewModel(socketHandler: socketHandler, stockFeedRow: row))
+          StockFeedDetailView(
+               socketHandler: socketHandler,
+               stockFeedRow: row
+             )
         } label: {
           StockFeedRowView(row: row)
         }
       }
       .navigationTitle("Stocks")
       .onAppear {
-        if isPolling {
-          viewModel.startPolling()
-        }
         viewModel.startUIListening()
       }
       .onDisappear {

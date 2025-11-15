@@ -17,10 +17,13 @@ struct StockFeedDetailView: View, PriceDirectionRepresentable, ConnectionSignalR
   }
   
   @StateObject var viewModel: StockFeedDetailViewModel
-  init(viewModel: StockFeedDetailViewModel) {
-    _viewModel = StateObject(wrappedValue: viewModel)
+  init(socketHandler: WebSocketHandler<StockPriceFeed>,
+       stockFeedRow: StockFeedRow) {
+    _viewModel = StateObject(wrappedValue: StockFeedDetailViewModel(
+      socketHandler: socketHandler,
+      stockFeedRow: stockFeedRow)
+    )
   }
-  
   var body: some View {
     NavigationStack {
       LazyVStack {
