@@ -77,7 +77,8 @@ class StockFeedViewModel: ObservableObject {
       symbol: symbol,
       company: company,
       price: newPrice,
-      direction: direction
+      direction: direction,
+      timestamp: .now
     )
     
     latestBySymbol[symbol] = row

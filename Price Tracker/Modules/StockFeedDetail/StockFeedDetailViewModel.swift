@@ -44,7 +44,8 @@ class StockFeedDetailViewModel: ObservableObject {
       let updateedFeed = StockFeedRow(symbol: feed.symbol,
                                       company: feed.name,
                                       price: feed.price,
-                                      direction: direction)
+                                      direction: direction,
+                                      timestamp: .now)
       self.stockFeedRow = updateedFeed
     }
   }

@@ -13,4 +13,5 @@ struct StockFeedRow: Identifiable {
   let company: String
   let price: Double
   let direction: PriceDirection
+  let timestamp: Date
 }
