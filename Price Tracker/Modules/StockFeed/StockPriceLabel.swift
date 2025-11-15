@@ -27,7 +27,7 @@ struct StockPriceLabel: View, PriceFlashRepresentable {
       .onReceive(Just(row.price)) { newPrice in
         withAnimation(.easeOut(duration: 0.25)) {
           let difference = Date.now.timeIntervalSince(row.timestamp)
-          if newPrice != lastPrice && difference < 5 {
+          if newPrice != lastPrice && difference < 2 {
             withAnimation(.easeOut(duration: 0.25)) {
               textColor = priceTextColor
             }

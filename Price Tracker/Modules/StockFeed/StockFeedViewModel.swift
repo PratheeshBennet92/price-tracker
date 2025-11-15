@@ -63,7 +63,7 @@ class StockFeedViewModel: ObservableObject {
     messagesCancellable?.cancel()
   }
   
-  private func handleIncoming(_ feed: StockPriceFeed) {
+  func handleIncoming(_ feed: StockPriceFeed) {
     //debugPrint(feed)
     let symbol = feed.symbol
     let newPrice = feed.price
