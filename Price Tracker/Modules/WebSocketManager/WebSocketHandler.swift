@@ -7,12 +7,30 @@
 
 import Foundation
 import Combine
-
+enum WebSocketConnectionError: Error {
+  case technical
+  case unknown
+  var description: String? {
+    switch self {
+    case .technical: return "WebSocket technical error occurred."
+    case .unknown: return "Unknown WebSocket error occurred."
+    }
+  }
+}
 enum WebSocketConnectionState {
   case disconnected
   case connecting
   case connected
-  case failed(Error)
+  case failed(WebSocketConnectionError)
+  
+  var connectionState: String {
+    switch self {
+    case .disconnected: return "Disconnected"
+    case .connecting: return "Connecting"
+    case .connected: return "Connected"
+    case .failed(let error): return "Failed (\(error.localizedDescription))"
+    }
+  }
 }
 
 final class WebSocketHandler<T: Codable>: ObservableObject {
@@ -101,7 +119,11 @@ final class WebSocketHandler<T: Codable>: ObservableObject {
     if isConnectionClosed {
       updateState(.disconnected)
     } else {
-      updateState(.failed(error))
+      if error is URLError {
+        updateState(.failed(WebSocketConnectionError.technical))
+      } else {
+        updateState(.failed(WebSocketConnectionError.unknown))
+      }
     }
     debugPrint(error)
   }
@@ -113,5 +135,3 @@ final class WebSocketHandler<T: Codable>: ObservableObject {
   }
   
 }
-
-
