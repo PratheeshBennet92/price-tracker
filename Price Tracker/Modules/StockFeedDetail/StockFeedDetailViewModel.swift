@@ -27,7 +27,7 @@ class StockFeedDetailViewModel: ObservableObject {
     
     socketHandler.messages
       .receive(on: DispatchQueue.main)
-      .collect(.byTime(DispatchQueue.main, .milliseconds(1000)))
+      .collect(.byTime(DispatchQueue.main, .milliseconds(2000)))
       .sink { [weak self] stockFeed in
         stockFeed.forEach({
           self?.handleIncoming($0)

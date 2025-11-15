@@ -23,11 +23,11 @@ struct StockFeedDetailView: View, PriceDirectionRepresentable, ConnectionSignalR
   
   var body: some View {
     NavigationStack {
-      VStack {
+      LazyVStack {
         Text(viewModel.stockFeedRow.company)
           .font(Font.title).padding(.bottom, 20)
         HStack {
-          Text("\(viewModel.stockFeedRow.price, specifier: "%.2f")")
+          StockPriceLabel(row: viewModel.stockFeedRow)
             .font(.title2)
           Text(directionSymbol)
             .font(.title2.bold())

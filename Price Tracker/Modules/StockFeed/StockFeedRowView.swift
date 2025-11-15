@@ -22,9 +22,7 @@ struct StockFeedRowView: View, PriceDirectionRepresentable {
       }
       
       Spacer()
-      
-      Text("\(row.price, specifier: "%.2f")")
-        .font(.subheadline)
+      StockPriceLabel(row: row)
       Text(directionSymbol)
         .font(.subheadline.bold())
         .foregroundStyle(directionColor)
