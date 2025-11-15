@@ -12,9 +12,11 @@ struct StockFeedView: View {
   @StateObject private var viewModel: StockFeedViewModel
   @State private var isPolling: Bool = false
   @State private var shouldShowErrorAlert: Bool = false
+  private let socketHandler: WebSocketHandler<StockPriceFeed>
 
   init(socketHandler: WebSocketHandler<StockPriceFeed>) {
     _viewModel = StateObject(wrappedValue: StockFeedViewModel(socketHandler: socketHandler))
+    self.socketHandler = socketHandler
   }
   private var errorView: some View {
     Group {
@@ -66,20 +68,13 @@ struct StockFeedView: View {
       }
       List(viewModel.stocks) { row in
         NavigationLink {
-          Text("\(row.symbol) - \(row.price)")
+          StockFeedDetailView(viewModel:  StockFeedDetailViewModel(socketHandler: socketHandler, stockFeedRow: row))
         } label: {
           StockFeedRowView(row: row)
         }
       }
       .navigationTitle("Stocks")
-      .toolbar {
-        ToolbarItem(placement: .automatic) {
-          
-        }
-      }
-      
       .onAppear {
-        viewModel.startPolling()
         isPolling = true
       }
     }

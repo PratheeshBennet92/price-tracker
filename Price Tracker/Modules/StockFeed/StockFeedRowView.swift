@@ -7,24 +7,11 @@
 
 import SwiftUI
 
-struct StockFeedRowView: View {
+struct StockFeedRowView: View, PriceDirectionRepresentable {
+  var direction: PriceDirection {
+    row.direction
+  }
   let row: StockFeedRow
-  private var directionSymbol: String {
-    switch row.direction {
-    case .up:   return "↑"
-    case .down: return "↓"
-    default:
-      return ""
-    }
-  }
-  private var directionColor: Color {
-    switch row.direction {
-    case .up:   return .green
-    case .down: return .red
-    default:
-      return .white
-    }
-  }
   var body: some View {
     HStack {
       VStack(alignment: .leading) {

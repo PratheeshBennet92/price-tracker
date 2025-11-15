@@ -13,6 +13,7 @@ struct Price_TrackerApp: App {
   let mockFeedManager: MockPriceFeedManager
   
   init() {
+    socketHandler.connect()
     mockFeedManager = MockPriceFeedManager(socketHandler: socketHandler)
   }
   

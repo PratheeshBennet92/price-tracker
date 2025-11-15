@@ -19,7 +19,6 @@ final class MockPriceFeedManager {
   }
   
   func startFeeder() {
-    socketHandler.connect()
     startTimer()
   }
   
