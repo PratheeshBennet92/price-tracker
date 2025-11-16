@@ -17,7 +17,7 @@ enum WebSocketConnectionError: Error {
     }
   }
 }
-enum WebSocketConnectionState {
+enum WebSocketConnectionState: Equatable {
   case disconnected
   case connecting
   case connected

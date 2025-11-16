@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct Price_TrackerApp: App {
   @Environment(\.scenePhase) private var scenePhase
+  @State private var shouldResumeSocket: Bool = false
   private let socketHandler = WebSocketHandler<StockPriceFeed>()
   let mockFeedManager: MockPriceFeedManager
   
@@ -23,12 +24,19 @@ struct Price_TrackerApp: App {
       StockFeedContainer().environment(\.stockPriceSocketHandler, socketHandler)
     }
     .onChange(of: scenePhase) { oldPhase, newPhase in
-      switch newPhase {
-      case .active:
-        socketHandler.connect()
-        socketHandler.receiveMessages()
-      case .inactive, .background:
-        socketHandler.disconnect()
+      switch (oldPhase, newPhase) {
+      case (.inactive, .active):
+        if shouldResumeSocket {
+          socketHandler.connect()
+          socketHandler.receiveMessages()
+        }
+      case (.active, .inactive):
+        if socketHandler.connectionState == .connected {
+          socketHandler.disconnect()
+          shouldResumeSocket = true
+        } else {
+          shouldResumeSocket = false
+        }
       default:
         break
       }
